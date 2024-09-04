@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1">
+    <title>Bejelentkezés</title>
+    {{ block("stylesheets", "elements.twig") }}
+    {{ block("scripts", "elements.twig") }}
+</head>
+<body class="" style="background-image: url('./assets/premium/boxed-bg/polygon/bg/2.jpg');">
+    <div class="root front-container">
+        <section class="content">
+            <div class="content__boxed w-100 min-vh-100 d-flex flex-column align-items-center justify-content-center">
+                <div class="content__wrap">
+                    <div class="card shadow-lg">
+                        <div class="card-body">
+                            <div class="text-center">
+                                <h1 class="h3">Regisztráció</h1>
+                                <p>Hozza létre profilját!</p>
+                            </div>
+                            <form
+                                class="mt-5 ajax-form"
+                                action="{{ url_for('userRegistrationJson')}}"
+                                data-ajax-success-replace-url="{{ url_for('dashboard')}}">
+                                <div class="w-md-400px d-inline-flex row g-3 mb-4">
+                                    <div class="col-sm-6">
+                                        <input type="text" class="form-control" name="lastName" placeholder="Vezetéknév" aria-label="Vezetéknév" autofocus>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <input type="text" class="form-control" name="firstName" placeholder="Keresztnév" aria-label="keresztnév">
+                                    </div>
+                                    <div class="col-12">
+                                        <input type="email" class="form-control" name="email" placeholder="E-mail cím" aria-label="E-mail cím">
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <input type="password" class="form-control" name="password" placeholder="Jelszó" aria-label="Jelszó">
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <input type="password" class="form-control" name="passwordConfirm" placeholder="Jelszó újra" aria-label="Jelszó újra">
+                                    </div>
+                                    <div class="form-text">A jelszónak legalább 8 karakternek kell lennie, és tartalmaznia kell kisbetűt, nagybetűt, és számot</div>
+                                </div>
+
+                                <div class="d-grid mt-5">
+                                    <button class="btn btn-primary btn-lg" type="submit">Regisztráció</button>
+                                </div>
+                            </form>
+
+                            <div class="d-flex justify-content-between mt-4">
+                                Van már profilja?
+                                <a href="{{ url_for('userSigninPage')}}" class="btn-link text-decoration-none">Bejelentkezés</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+</body>
+</html>

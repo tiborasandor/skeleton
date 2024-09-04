@@ -1,0 +1,82 @@
+{% extends 'app.twig' %}
+
+{% block content %}
+    <div class="content__header content__boxed rounded-0">
+        <div class="content__wrap d-md-flex align-items-start">
+            <figure class="m-0">
+                <div class="d-inline-flex align-items-center position-relative pt-xl-5 mb-3">
+                    <div class="flex-shrink-0">
+                        <img class="img-xl rounded-circle" src="./assets/img/profile-photos/blank.png" alt="Profile Picture" loading="lazy">
+                    </div>
+                    <div class="flex-grow-1 ms-4">
+                        <span class="h3 btn-link">{{ user.lastName }} {{ user.firstName }}</span>
+                    </div>
+                </div>
+            </figure>
+            <div class="d-inline-flex justify-content-end pt-xl-5 gap-2 ms-auto">
+                <button class="btn btn-light text-nowrap">Profil szerkesztés</button>
+            </div>
+        </div>
+    </div>
+    <div class="content__boxed">
+        <div class="content__wrap">
+            <div class="alert alert-warning" role="alert"><strong>Figyelem!</strong> Ez az oldal még fejlesztés alatt áll, így az itt megjelenő adatok (ha vannak) lehetséges hogy nem pontosak.</div>
+            <div class="d-md-flex gap-4">
+                <div class="w-md-200px flex-shrink-0">
+                    <h5>Adataim</h5>
+                    <ul class="list-unstyled mb-3">
+                        <li class="mb-2"><i class="fa-duotone fa-signature fs-5 me-3"></i>{{ user.lastName }} {{ user.firstName }}</li>
+                        {% if user.phone %}<li class="mb-2"><i class="fa-duotone fa-phone fs-5 me-3"></i>{{ user.phone }}</li>{% endif %}
+                        <li class="mb-2"><i class="fa-duotone fa-envelope fs-5 me-3"></i>{{ user.email }}</li>
+                    </ul>
+                    {% if user.bio %}
+                        <h5>Rólam</h5>
+                        <p>{{ user.bio }}</p>
+                    {% endif %}
+                </div>
+                <div class="vr d-none"></div>
+                    <div class="flex-fill">
+                        <div class="timeline">
+
+                            <div class="tl-entry active">
+                                <div class="tl-time">
+                                    <div class="tl-date date-format">{{ user.inserted }}</div>
+                                    <div class="tl-time time-format">{{ user.inserted }}</div>
+                                </div>
+                                <div class="tl-point"></div>
+                                <div class="tl-content card">
+                                    <div class="card-body">Sikeres regisztráció</div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+{% endblock %}
+
+{% block sidebar %}
+    {% if user.companies is not empty %}
+        <aside class="sidebar">
+            <div class="sidebar__inner scrollable-content">
+                <div class="sidebar__wrap">
+                    <h5 class="px-3">Saját vállalkozásaim</h5>
+                    <div class="list-group list-group-borderless">
+                        {% for company in user.companies %}
+                            <div class="list-group-item d-flex align-items-start mb-3">
+                                <div class="flex-shrink-0 me-3">
+                                    <img class="img-sm rounded-circle" src="./assets/img/profile-photos/blank.png" alt="Profile Picture" loading="lazy">
+                                </div>
+                                <div class="flex-grow-1 ">
+                                    <a href="{{ url_for('companyDashboardPage', { cId: company.id }) }}" class="h6 d-block mb-2 text-decoration-none">{{ company.shortName }}</a>
+                                    <a href="{{ url_for('companyDashboardPage', { cId: company.id }) }}" class="btn btn-xs btn-light">Dashboard</a>
+                                </div>
+                            </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </aside>
+    {% endif %}
+{% endblock %}

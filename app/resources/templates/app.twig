@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="hu">
+    <head>
+        <base href="{{ base_path() }}">
+        <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+        <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1">
+        <title>Skeleton</title>
+        {{ block("stylesheets", "elements.twig") }}
+        {{ block("scripts", "elements.twig") }}
+        {% block head %}{% endblock %}
+    </head>
+    <body>
+        {% block content %}{% endblock %}
+        {{ block("modal", "elements.twig") }}
+        {% block bodyTail %}{% endblock %}
+        <script>
+            {% for message in flash.get('success') %}
+                toastr.success('{{ message }}')
+            {% endfor %}
+        </script>
+    </body>
+</html>
